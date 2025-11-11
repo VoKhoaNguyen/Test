@@ -34,7 +34,6 @@
             padding-bottom: 10px;
         }
 
-        /* --- SỬA LỖI 1: Căn chỉnh mũi tên --- */
         .category-toggle {
             background-color: #f0f0f0;
             color: #333;
@@ -50,10 +49,9 @@
             margin-top: 15px;
             transition: background-color 0.3s;
             
-            /* Thêm Flexbox để căn chỉnh */
             display: flex;
-            justify-content: space-between; /* Đẩy 2 item ra 2 đầu */
-            align-items: center; /* Căn giữa theo chiều dọc */
+            justify-content: space-between;
+            align-items: center;
         }
 
         .category-toggle:hover {
@@ -61,20 +59,16 @@
         }
         
         .category-toggle::after {
-            content: '\25BC'; /* Mũi tên xuống */
+            content: '\25BC';
             font-size: 12px;
-            /* Bỏ float: right */
-            margin-left: 10px; /* Khoảng cách giữa chữ và mũi tên */
+            margin-left: 10px;
             transition: transform 0.3s;
         }
         
         .category-toggle.active::after {
             transform: rotate(180deg);
         }
-        /* --- Hết SỬA LỖI 1 --- */
 
-
-        /* --- Menu con (bị ẩn) --- */
         .submenu {
             padding: 0;
             list-style-type: none;
@@ -104,7 +98,7 @@
         }
 
         .submenu li a:hover,
-        .sidebar ul li a.active { /* CSS cho trang đang được chọn */
+        .sidebar ul li a.active {
             background-color: #e6f0f7;
             color: #005A9C;
         }
@@ -116,32 +110,52 @@
             padding: 40px;
             box-sizing: border-box;
 
-            /* --- SỬA LỖI 2: Căn giữa nội dung --- */
             display: flex;
             flex-direction: column;
-            align-items: center; /* Căn giữa theo chiều ngang */
-            text-align: center; /* Căn giữa chữ */
-            /* --- Hết SỬA LỖI 2 --- */
+            align-items: center;
+            /* text-align: center; */ /* Bỏ căn giữa text cho từng phần tử nhỏ */
         }
 
         .content h1 {
             color: #005A9C;
+            text-align: center; /* Căn giữa tiêu đề chính */
+            margin-bottom: 30px;
         }
         
-        /* --- SỬA LỖI 4: CSS cho khu vực ảnh --- */
-        .function-gallery {
-            margin-top: 30px;
-            width: 90%; /* Chiều rộng của khung chứa ảnh */
+        /* --- CSS cho từng phần chức năng và ảnh --- */
+        .function-section {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+            padding: 30px;
+            width: 90%; /* Chiếm phần lớn chiều rộng */
+            max-width: 900px; /* Giới hạn chiều rộng tối đa */
+            text-align: left; /* Căn trái nội dung trong từng section */
         }
-        
-        .function-gallery img {
-            width: 100%; /* Ảnh tự co giãn theo khung */
+
+        .function-section h2 {
+            color: #005A9C;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .function-section p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .function-section img {
+            max-width: 100%;
             height: auto;
-            border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #ccc;
+            margin-top: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        /* --- Hết SỬA LỖI 4 --- */
 
     </style>
 </head>
@@ -187,10 +201,75 @@
     
         <h1>Chào mừng đến với Hướng dẫn sử dụng Cửa hàng Nông dược</h1>
         
-        <div class="function-gallery">
-            <p>Đây là giao diện các chức năng chính của phần mềm:</p>
+        <div class="function-section">
+            <h2>Đăng nhập Hệ thống</h2>
+            <p>Trước khi sử dụng phần mềm, bạn cần đăng nhập bằng tài khoản và mật khẩu đã được cấp.</p>
+            <img src="Images/dangnhap.jpg" alt="Giao diện đăng nhập phần mềm">
+        </div>
+
+        <div class="function-section">
+            <h2>Giao diện Chính của Phần mềm</h2>
+            <p>Sau khi đăng nhập thành công, bạn sẽ thấy giao diện chính với thanh công cụ chứa các chức năng cơ bản.</p>
+            <img src="Images/main.jpg" alt="Thanh công cụ giao diện chính phần mềm">
+        </div>
+
+        <div class="function-section">
+            <h2>📦 Quản lý Danh mục</h2>
+            <p>Phần này giúp bạn quản lý các thông tin cơ sở như sản phẩm, khách hàng, nhà cung cấp, đại lý và người dùng.</p>
             
-            <img src="Images/main.jpg" alt="Thanh công cụ các chức năng">
+            <h3>Sản phẩm</h3>
+            <p>Quản lý các mặt hàng nông dược, bao gồm thông tin chi tiết, giá cả và số lượng.</p>
+            <img src="Images/sanpham.jpg" alt="Giao diện quản lý Sản phẩm">
+
+            <h3>Nhà cung cấp</h3>
+            <p>Quản lý thông tin các nhà cung cấp sản phẩm của cửa hàng.</p>
+            <img src="Images/nhacungcap.jpg" alt="Giao diện quản lý Nhà cung cấp">
+
+            <h3>Khách hàng</h3>
+            <p>Quản lý thông tin khách hàng lẻ để dễ dàng theo dõi giao dịch.</p>
+            <img src="Images/khachhang.jpg" alt="Giao diện quản lý Khách hàng">
+
+            <h3>Đại lý</h3>
+            <p>Quản lý thông tin các đại lý hoặc khách sỉ của cửa hàng.</p>
+            <img src="Images/daily.jpg" alt="Giao diện quản lý Đại lý">
+
+            <h3>Người Dùng</h3>
+            <p>Quản lý tài khoản đăng nhập và phân quyền cho người dùng phần mềm.</p>
+            <img src="Images/nguoidung.jpg" alt="Giao diện quản lý Người Dùng">
+        </div>
+
+        <div class="function-section">
+            <h2>💸 Quản lý Nghiệp vụ</h2>
+            <p>Đây là các chức năng chính để thực hiện các giao dịch nhập xuất, thu chi hàng ngày.</p>
+            
+            <h3>Nhập hàng</h3>
+            <p>Lập phiếu nhập kho khi nhập hàng từ nhà cung cấp.</p>
+            <img src="Images/nhaphang.jpg" alt="Giao diện lập phiếu Nhập hàng">
+
+            <h3>Bán sỉ</h3>
+            <p>Lập phiếu bán hàng cho các đại lý hoặc khách hàng mua sỉ.</p>
+            <img src="Images/bansi.jpg" alt="Giao diện lập phiếu Bán sỉ">
+
+            <h3>Bán lẻ</h3>
+            <p>Lập phiếu bán hàng cho khách hàng lẻ.</p>
+            <img src="Images/banle.jpg" alt="Giao diện lập phiếu Bán lẻ">
+
+            <h3>Phiếu chi</h3>
+            <p>Ghi lại các khoản chi tiêu của cửa hàng.</p>
+            <img src="Images/phieuchi.jpg" alt="Giao diện lập Phiếu chi">
+
+            <h3>Phiếu thu</h3>
+            <p>Ghi lại các khoản thu tiền từ khách hàng hoặc các nguồn khác.</p>
+            <img src="Images/phieuthu.jpg" alt="Giao diện lập Phiếu thu">
+        </div>
+
+        <div class="function-section">
+            <h2>📊 Báo cáo</h2>
+            <p>Tổng hợp và xem các báo cáo quan trọng về hoạt động kinh doanh.</p>
+            
+            <h3>Tồn kho</h3>
+            <p>Xem báo cáo số lượng tồn kho của tất cả các sản phẩm.</p>
+            <img src="Images/tonkho.jpg" alt="Giao diện báo cáo Tồn kho">
         </div>
         
     </main>
@@ -201,7 +280,6 @@
 
         toggles.forEach(function(toggle) {
             toggle.addEventListener("click", function() {
-                
                 // Bỏ qua nếu là nút "Giới thiệu chung"
                 if (this.getAttribute('onclick')) return;
 
