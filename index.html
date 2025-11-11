@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-g">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hướng dẫn sử dụng - Cửa hàng Nông dược</title>
+    
     <style>
         /* --- Cài đặt chung --- */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex; /* Chia bố cục thành 2 cột */
+            display: flex;
             background-color: #f4f7f6;
             line-height: 1.6;
         }
 
         /* --- Thanh điều hướng (Sidebar) bên trái --- */
         .sidebar {
-            width: 260px;
+            width: 280px; /* Rộng hơn một chút để chứa emoji */
             background-color: #ffffff;
-            height: 100vh; /* Cao 100% màn hình */
-            position: fixed; /* Cố định khi cuộn */
+            height: 100vh;
+            position: fixed;
             border-right: 1px solid #e0e0e0;
             padding: 20px;
-            box-sizing: border-box; /* Tính cả padding vào width */
+            box-sizing: border-box;
+            overflow-y: auto; /* Tự động cuộn nếu menu quá dài */
         }
 
         .sidebar h2 {
@@ -32,17 +34,66 @@
             padding-bottom: 10px;
         }
 
-        .sidebar ul {
-            list-style-type: none;
+        /* --- Nút bấm danh mục (QUAN TRỌNG) --- */
+        .category-toggle {
+            background-color: #f0f0f0;
+            color: #333;
+            cursor: pointer;
+            padding: 15px 20px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        .category-toggle:hover {
+            background-color: #ddd;
+        }
+        
+        /* Thêm mũi tên chỉ xuống */
+        .category-toggle::after {
+            content: '\25BC'; /* Ký tự mũi tên xuống */
+            font-size: 12px;
+            float: right;
+            transition: transform 0.3s;
+        }
+        
+        /* Khi active (mở), mũi tên xoay lên */
+        .category-toggle.active::after {
+            transform: rotate(180deg);
+        }
+
+        /* --- Menu con (bị ẩn) (QUAN TRỌNG) --- */
+        .submenu {
             padding: 0;
-            margin: 0;
+            list-style-type: none;
+            background-color: #fafafa;
+            
+            /* Logic ẩn/hiện bằng max-height để tạo animation */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            
+            /* Thụt lề các mục con */
+            padding-left: 20px; 
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        
+        /* Lớp .active sẽ được JS thêm vào để hiện menu */
+        .submenu.active {
+            /* 500px là chiều cao đủ lớn, bạn có thể tăng nếu menu con dài hơn */
+            max-height: 500px; 
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
 
-        .sidebar ul li {
-            margin-bottom: 10px;
-        }
-
-        .sidebar ul li a {
+        .submenu li a {
             text-decoration: none;
             color: #333;
             font-weight: 500;
@@ -52,39 +103,21 @@
             transition: background-color 0.2s;
         }
 
-        .sidebar ul li a:hover,
-        .sidebar ul li a.active { /* CSS cho trang đang được chọn */
+        .submenu li a:hover {
             background-color: #e6f0f7;
             color: #005A9C;
         }
 
         /* --- Khung nội dung chính bên phải --- */
         .content {
-            flex-grow: 1; /* Tự động chiếm phần còn lại */
-            margin-left: 260px; /* Chừa chỗ cho sidebar */
+            flex-grow: 1;
+            margin-left: 280px; /* Bằng chiều rộng sidebar */
             padding: 40px;
             box-sizing: border-box;
         }
 
         .content h1 {
             color: #005A9C;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 15px;
-        }
-
-        .content p {
-            font-size: 16px;
-            color: #555;
-        }
-        
-        /* CSS cho hình ảnh hướng dẫn */
-        .content img {
-            max-width: 100%; /* Đảm bảo ảnh không bị tràn */
-            height: auto;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            margin-top: 15px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
     </style>
@@ -93,31 +126,67 @@
 
     <nav class="sidebar">
         <h2>Menu Hướng dẫn</h2>
-        <ul>
-            <li><a href="index.html" class="active">Giới thiệu</a></li>
-            <li><a href="khachhang.html">Quản lý Khách hàng</a></li>
-            <li><a href="sanpham.html">Quản lý Sản phẩm</a></li>
-            <li><a href="phieuban.html">Lập Phiếu Bán</a></li>
-            <li><a href="phieunhap.html">Lập Phiếu Nhập</a></li>
-            <li><a href="baocao.html">Xem Báo cáo</a></li>
-        </ul>
+
+        <div>
+            <button class="category-toggle">📦 Quản lý Danh mục</button>
+            <ul class="submenu">
+                <li><a href="sanpham.html">Sản phẩm</a></li>
+                <li><a href="nhacungcap.html">Nhà cung cấp</a></li>
+                <li><a href="khachhang.html">Khách hàng</a></li>
+                <li><a href="daily.html">Đại lý</a></li>
+                <li><a href="nguoidung.html">Người Dùng</a></li>
+            </ul>
+        </div>
+        
+        <div>
+            <button class="category-toggle">💸 Quản lý Nghiệp vụ</button>
+            <ul class="submenu">
+                <li><a href="nhaphang.html">Nhập hàng</a></li>
+                <li><a href="bansi.html">Bán sỉ</a></li>
+                <li><a href="banle.html">Bán lẻ</a></li>
+                <li><a href="phieuchi.html">Phiếu chi</a></li>
+                <li><a href="phieuthu.html">Phiếu thu</a></li>
+            </ul>
+        </div>
+        
+        <div>
+            <button class="category-toggle">📊 Báo cáo</button>
+            <ul class="submenu">
+                <li><a href="tonkho.html">Tồn kho</a></li>
+            </ul>
+        </div>
+
     </nav>
 
     <main class="content">
         <h1>Chào mừng đến với Hướng dẫn sử dụng Cửa hàng Nông dược</h1>
         
-        <p>Đây là tài liệu hướng dẫn chính thức, giúp bạn sử dụng phần mềm một cách hiệu quả nhất.</p>
-        <p>Vui lòng chọn một mục từ thanh menu bên trái để xem chi tiết hướng dẫn cho từng chức năng, ví dụ như <strong>Quản lý Khách hàng</strong>, <strong>Quản lý Sản phẩm</strong>, v.v.</p>
-        
-        <h3>Bạn có thể làm gì?</h3>
-        <ul>
-            <li><strong>Tra cứu nhanh:</strong> Dùng menu bên trái để đi đến chức năng bạn cần.</li>
-            <li><strong>Hỗ trợ:</strong> Nếu không tìm thấy trợ giúp, vui lòng liên hệ với bộ phận kỹ thuật.</li>
-        </ul>
+        <p>Vui lòng chọn một mục từ thanh menu bên trái để xem chi tiết.</p>
+        <p>Khi bạn bấm vào một danh mục (ví dụ: "Quản lý Danh mục"), các mục con sẽ tự động xổ ra.</p>
+    </main>
+    
+    
+    <script>
+        // Lấy tất cả các nút bấm danh mục
+        var toggles = document.querySelectorAll(".category-toggle");
 
-        <p>Chúc bạn làm việc hiệu quả!</p>
-        
-        </main>
+        // Lặp qua từng nút
+        toggles.forEach(function(toggle) {
+            
+            // Thêm sự kiện 'click'
+            toggle.addEventListener("click", function() {
+                
+                // Thêm/xóa lớp 'active' trên chính nút bấm (để xoay mũi tên)
+                this.classList.toggle("active");
+                
+                // Lấy menu con (là phần tử <ul> ngay sau nút bấm)
+                var submenu = this.nextElementSibling;
+                
+                // Thêm/xóa lớp 'active' trên menu con (để hiện/ẩn)
+                submenu.classList.toggle("active");
+            });
+        });
+    </script>
 
 </body>
 </html>
